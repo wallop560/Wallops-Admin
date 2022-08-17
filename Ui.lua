@@ -97,6 +97,19 @@ local Admin_UI = Create(
 )
 Admin_UI.Parent = game.CoreGui
 
+local OrigonalSize = Admin_UI.CmdBar.Size
+
+Admin_UI.CmdBar.TextFrame.CmdBox.Changed:Connect(function()
+    local textBounds = Admin_UI.CmdBar.TextFrame.CmdBox.TextBounds.X + 10
+    local Bounds = Admin_UI.CmdBar.TextFrame.AbsoluteSize.X 
+
+    if textBounds > OrigonalSize.X.Offset then
+        Admin_UI.CmdBar.Size = UDim2.new(0,TextBounds+10,0,OrigonalSize.Y.Offset)
+    else
+        Admin_UI.CmdBar.Size = OrigonalSize
+    end
+end)
+
 local UI = {ScreenGui=Admin_UI,Main=Admin_UI.CmdBar,TextBox=Admin_UI.CmdBar.TextFrame.CmdBox,DropShadow = Admin_UI.CmdBar.DropShadow}
 
 function UI:ApplyTheming(Instance)
