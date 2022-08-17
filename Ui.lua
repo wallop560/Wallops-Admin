@@ -108,7 +108,7 @@ function UI:ApplyTheming(Instance)
         Instance.FontSize = Enum.FontSize.Size18
         Instance.TextSize = 16
         Instance.BackgroundColor3 = Color3.new(0.447059, 0.537255, 0.85098)
-    elseif Instance:IsA('TextBox')
+    elseif Instance:IsA('TextBox') then
         Instance.TextColor3 = Color3.new(0.843137, 0.839216, 0.85098)
         Instance.Font = Enum.Font.SourceSansBold
         Instance.LineHeight = 1.1
