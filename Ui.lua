@@ -14,7 +14,7 @@ function Create(Class,Properties,Children)
 	return instance
 end
 --                         //   Created By I2L   \\
---                         ¦¦Plugin by wallop5607¦¦
+--                         Â¦Â¦Plugin by wallop5607Â¦Â¦
 --                         \\    le birdo#2221   //
 local Admin_UI = Create(
 	'ScreenGui',{
@@ -67,7 +67,7 @@ local Admin_UI = Create(
 						),
 						Create(
 							'TextBox',{
-                						Name = 'CmdBox',
+                                Name = 'CmdBox',
 								LineHeight = 1.100000023841858,
 								PlaceholderColor3 = Color3.new(0.427451, 0.443137, 0.478431),
 								PlaceholderText = 'type @command',
@@ -80,8 +80,7 @@ local Admin_UI = Create(
 								BackgroundTransparency = 1,
 								TextXAlignment = Enum.TextXAlignment.Left,
 								FontSize = Enum.FontSize.Size18,
-								BackgroundColor3 = Color3.new(1, 1, 1),
-								TextColor = BrickColor.new('Quill grey')
+								BackgroundColor3 = Color3.new(1, 1, 1)
 							},{
 								Create(
 									'UIPadding',{
@@ -99,5 +98,38 @@ local Admin_UI = Create(
 Admin_UI.Parent = game.CoreGui
 
 local UI = {ScreenGui=Admin_UI,Main=Admin_UI.CmdBar,TextBox=Admin_UI.CmdBar.TextFrame.CmdBox,DropShadow = Admin_UI.CmdBar.DropShadow}
+
+function UI:ApplyTheming(Instance)
+    if Instance:IsA('TextLabel') or Instance:IsA('TextButton') then 
+        Instance.TextColor3 = Color3.new(0.843137, 0.839216, 0.85098)
+        Instance.Font = Enum.Font.SourceSansBold
+        Instance.LineHeight = 1.1
+        Instance.TextXAlignment = Enum.TextXAlignment.Left
+        Instance.FontSize = Enum.FontSize.Size18
+        Instance.TextSize = 16
+        Instance.BackgroundColor3 = Color3.new(0.447059, 0.537255, 0.85098)
+    elseif Instance:IsA('TextBox')
+        Instance.TextColor3 = Color3.new(0.843137, 0.839216, 0.85098)
+        Instance.Font = Enum.Font.SourceSansBold
+        Instance.LineHeight = 1.1
+        Instance.TextXAlignment = Enum.TextXAlignment.Left
+        Instance.FontSize = Enum.FontSize.Size18
+        Instance.TextSize = 16
+        Instance.PlaceholderColor3 = Color3.new(0.427451, 0.443137, 0.478431)
+        Instance.BackgroundColor3 = Color3.new(0.25098, 0.266667, 0.294118)
+        Create('UICorner',{CornerRadius = UDim.new(0, 6)}).Parent = Instance
+    end
+end
+
+function UI:NewWindow(Size,Position)
+    local MainFrame = UI.Main:Clone()
+
+    MainFrame.TextFrame:Destroy()
+
+    return MainFrame
+end
+
+UI.Create = Create
+
 
 return UI
