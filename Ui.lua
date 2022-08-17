@@ -14,7 +14,7 @@ function Create(Class,Properties,Children)
 	return instance
 end
 --                         //   Created By I2L   \\
---                         ¦¦Plugin by wallop5607¦¦
+--                         Â¦Â¦Plugin by wallop5607Â¦Â¦
 --                         \\    le birdo#2221   //
 local Admin_UI = Create(
 	'ScreenGui',{
@@ -41,7 +41,7 @@ local Admin_UI = Create(
 						Name = 'DropShadow',
 						Position = UDim2.new(0.5, 3, 0.5, 3),
 						BorderColor3 = Color3.new(0.105882, 0.164706, 0.207843),
-						Size = UDim2.new(0, 200, 0, 40),
+						Size = UDim2.new(1,0,1,0),
 						BackgroundColor3 = Color3.new(0.447059, 0.537255, 0.85098)
 					},{
 						Create(
@@ -98,4 +98,6 @@ local Admin_UI = Create(
 )
 Admin_UI.Parent = game.CoreGui
 
-return {ScreenGui=Admin_UI,Main=Admin_UI.CmdBar,TextBox=Admin_UI.CmdBar.TextFrame.CmdBox,DropShadow = Admin_UI.CmdBar.DropShadow}
+local UI = {ScreenGui=Admin_UI,Main=Admin_UI.CmdBar,TextBox=Admin_UI.CmdBar.TextFrame.CmdBox,DropShadow = Admin_UI.CmdBar.DropShadow}
+
+return UI
