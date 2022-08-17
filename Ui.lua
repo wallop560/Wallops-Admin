@@ -14,7 +14,7 @@ function Create(Class,Properties,Children)
 	return instance
 end
 --                         //   Created By I2L   \\
---                         Â¦Â¦Plugin by wallop5607Â¦Â¦
+--                         ¦¦Plugin by wallop5607¦¦
 --                         \\    le birdo#2221   //
 local Admin_UI = Create(
 	'ScreenGui',{
