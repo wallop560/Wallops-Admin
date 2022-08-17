@@ -67,7 +67,7 @@ local Admin_UI = Create(
 						),
 						Create(
 							'TextBox',{
-                Name = 'CmdBox',
+                						Name = 'CmdBox',
 								LineHeight = 1.100000023841858,
 								PlaceholderColor3 = Color3.new(0.427451, 0.443137, 0.478431),
 								PlaceholderText = 'type @command',
