@@ -99,14 +99,17 @@ Admin_UI.Parent = game.CoreGui
 
 local OrigonalSize = Admin_UI.CmdBar.Size
 
-Admin_UI.CmdBar.TextFrame.CmdBox.Changed:Connect(function()
-    local textBounds = Admin_UI.CmdBar.TextFrame.CmdBox.TextBounds.X + 10
+Admin_UI.CmdBar.TextFrame.CmdBox:GetPropertyChangedSignal('TextBounds'):Connect(function()
+    local textBounds = Admin_UI.CmdBar.TextFrame.CmdBox.TextBounds.X + 20
     local Bounds = Admin_UI.CmdBar.TextFrame.AbsoluteSize.X 
 
-    if textBounds > OrigonalSize.X.Offset then
-        Admin_UI.CmdBar.Size = UDim2.new(0,TextBounds+10,0,OrigonalSize.Y.Offset)
+
+    if textBounds > Bounds then
+        print(textBounds,OrigonalSize.X.Offset)
+        game:GetService('TweenService'):Create(Admin_UI.CmdBar,TweenInfo.new(.1,Enum.EasingStyle.Quad),{Size = UDim2.new(0,textBounds+10,0,OrigonalSize.Y.Offset)}):Play()
     else
-        Admin_UI.CmdBar.Size = OrigonalSize
+        print(textBounds,OrigonalSize.X.Offset)
+        game:GetService('TweenService'):Create(Admin_UI.CmdBar,TweenInfo.new(.1,Enum.EasingStyle.Quad),{Size = OrigonalSize}):Play()
     end
 end)
 
