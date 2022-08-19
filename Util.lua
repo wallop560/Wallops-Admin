@@ -1,6 +1,6 @@
 local Util = {}
 
-Util.Create = function Create(Class,Properties,Children)
+Util.Create = function (Class,Properties,Children)
 	Class = Class or 'Frame'
 	Properties = Properties or {}
 	Children = Children or {}
