@@ -21,16 +21,20 @@ function FakeCmds:AddCommand(CommandNames,Arguments,Description,Call)
 	for i,v in next,CommandNames do
 		CommandNames[i] = string.lower(v)
 	end
-	table.insert(Cmds,setmetatable({
+
+	local Command = {
 		CommandNames = CommandNames,
 		Arguments = Arguments,
 		Description = Description,
 		Call = Call
-	},{
+	}
+	setmetatable(Command,{
 		__call = function(table)
 			table.call()
 		end
-	}))
+	})
+
+	table.insert(Cmds,Command)
 end
 
 function FakeCmds:GetCommands()
@@ -52,6 +56,7 @@ function FakeCmds:GetClosestCommand(Text)
 	if Text == '' then return text,nil,false end
 	for _,Command in next,Cmds do -- check for exact match
 		for _,CommandName in next,Command.CommandNames do
+			print(CommandName)
 			if CommandName == string.lower(Text) then
 				return Text,Command,true
 			end
