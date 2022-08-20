@@ -1,6 +1,6 @@
 local Util = {}
 
-Util.Create = function (Class,Properties,Children)
+Util.Create = function(Class,Properties,Children)
 	Class = Class or 'Frame'
 	Properties = Properties or {}
 	Children = Children or {}
@@ -43,8 +43,15 @@ Util.GetPlayer = function(text)
 		return Players
 	end
 	for _,player in next,Players do
+		if string.lower(player.Name) == string.lower(text) then
+			return {player}
+		end
+	end
+	for _,player in next,Players do
 		Name = string.lower(player.Name)
-		if string.sub()
+		if string.sub(Name,1,#text) == string.lower(text) then
+			return {player}
+		end
 	end
 end
 return Util
