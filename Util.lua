@@ -54,4 +54,20 @@ Util.GetPlayer = function(text)
 		end
 	end
 end
+
+Util.GetCharacter = function(Player)
+	Player = Player or game.Players.LocalPlayer
+
+	return Player.Character or Player.CharacterAppearanceLoaded:Wait()
+end
+
+Util.GetHumanoid = function(Player)
+	local Character = Util.GetCharacter(player)
+	
+	if not Character:FindFirstChildOfClass('Humanoid') then
+		repeat wait() until Character:FindFirstChildOfClass('Humanoid')
+	end
+	return Character:FindFirstChildOfClass('Humanoid')
+end
+
 return Util
