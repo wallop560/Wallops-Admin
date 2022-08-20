@@ -58,7 +58,7 @@ function FakeCmds:GetClosestCommand(Text)
 		for _,CommandName in next,Command.CommandNames do
 			print(CommandName)
 			if CommandName == string.lower(Text) then
-				return Text,Command,true
+				return '',Command,true
 			end
 		end
 	end
