@@ -193,7 +193,7 @@ function UI:NewWindow(Size,Position)
     local MainFrame = UI.Main:Clone()
 
     MainFrame.TextFrame:Destroy()
-
+	MainFrame.Parent = Admin_UI
     return MainFrame
 end
 
