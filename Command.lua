@@ -56,7 +56,6 @@ function FakeCmds:GetClosestCommand(Text)
 	if Text == '' then return text,nil,false end
 	for _,Command in next,Cmds do -- check for exact match
 		for _,CommandName in next,Command.CommandNames do
-			print(CommandName)
 			if CommandName == string.lower(Text) then
 				return Text,Command,true
 			end
