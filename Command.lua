@@ -30,7 +30,7 @@ function FakeCmds:AddCommand(CommandNames,Arguments,Description,Call)
 	}
 	setmetatable(Command,{
 		__call = function(table)
-			table.call()
+			table.Call()
 		end
 	})
 
