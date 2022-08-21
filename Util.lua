@@ -57,8 +57,9 @@ end
 
 Util.GetCharacter = function(Player)
 	Player = Player or game:GetService('Players').LocalPlayer
-
-	return Player.Character or Player.CharacterAppearanceLoaded:Wait()
+	print(Player)
+	local Character = Player.Character or Player.CharacterAdded:Wait()
+	return Character
 end
 
 Util.GetHumanoid = function(Player)
