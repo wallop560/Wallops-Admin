@@ -220,7 +220,7 @@ Commands.Global = {
     },
     {
         Names = {'shop','serverhop','hopserver'},
-        Description = {'Joins a random server of the game you are in.'},
+        Description = 'Joins a random server of the game you are in.',
         Arguments = {},
         Call = function()
             local Servers = Util.GetServers(game.PlaceId,1,true)
