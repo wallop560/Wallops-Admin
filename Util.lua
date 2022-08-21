@@ -70,4 +70,5 @@ Util.GetHumanoid = function(Player)
 	return Character:FindFirstChildOfClass('Humanoid')
 end
 
+
 return Util
