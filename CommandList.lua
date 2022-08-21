@@ -187,10 +187,11 @@ Commands.Global = {
         Description = 'Stops you from colliding with objects.',
         Arguments = {},
         Call = function()
-            HumanoidConnections.NCR = (HumanoidConnections.NCR and HumanoidConnections.NCR:Disconnect() and false) or RS.RenderStepped:Connect(function()
+            HumanoidConnections.NCR = (HumanoidConnections.NCR and HumanoidConnections.NCR:Disconnect() and false) or RS.Stepped:Connect(function()
                 print('Rs')
-                if game.Players.LocalPlayer.Character then
-                    for _,Part in next,game.Players.LocalPlayer.Character:GetChildren() do
+                local Character = game:GetService('Players').LocalPlayer.Character
+                if Character then
+                    for _,Part in next,Character:GetChildren() do
                         if Part:IsA('BasePart') then
                             Part.CanCollide = false
                         end
@@ -201,7 +202,7 @@ Commands.Global = {
     },
     {
         Names = {'clip','collide'},
-        Description = 'Lets you from colliding with objects.',
+        Description = 'Lets you collide with objects.',
         Arguments = {},
         Call = function()
             HumanoidConnections.NCR = HumanoidConnections.NCR and HumanoidConnections.NCR:Disconnect() and nil or nil
