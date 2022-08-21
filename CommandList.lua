@@ -9,7 +9,7 @@ Commands.Global = {
         Description = 'Changed your characters WalkSpeed.',
         Arguments = {'Speed'},
         Call = function(Speed)
-            if typeof(Speed) ~= 'number' then return end
+            Speed = tonumber(Speed) or 16
             
             Util.GetCharacter():FindFirstChildOfClass('Humanoid').WalkSpeed = Speed
         end
@@ -19,7 +19,7 @@ Commands.Global = {
         Description = 'Changed your characters JumpPower.',
         Arguments = {'Power'},
         Call = function(Power)
-            if typeof(Power) ~= 'number' then return end
+            Power = tonumber(Power) or 50
             
             Util.GetCharacter():FindFirstChildOfClass('Humanoid').JumpPower = Power
         end
@@ -29,7 +29,12 @@ Commands.Global = {
         Description = 'Changed your characters HipHeight.',
         Arguments = {'Height'},
         Call = function(Height)
-            if typeof(Height) ~= 'number' then return end
+            
+            if Util.GetHumanoid().RigType == Enum.HumanoidRigType.R15 then
+                Height = tonumber(Height) or 2.1
+            else
+                Height = tonumber(Height) or 0
+            end
             
             Util.GetCharacter():FindFirstChildOfClass('Humanoid').HipHeight = Height
         end
@@ -39,8 +44,7 @@ Commands.Global = {
         Description = 'Loops changing your characters WalkSpeed.',
         Arguments = {'Speed'},
         Call = function(Speed)
-            Speed = Speed or 16
-            if typeof(Speed) ~= 'number' then return end
+            Speed = tonumber(Speed) or 16
             
             local Character = Util:GetCharacter()
             local Humanoid = Util.GetHumanoid()
@@ -68,8 +72,7 @@ Commands.Global = {
         Description = 'Loops changing your characters JumpPower.',
         Arguments = {'Power'},
         Call = function(Power)
-            Power = Power or 50
-            if typeof(Power) ~= 'number' then return end
+            Power = tonumber(Power) or 50
             
             local Character = Util:GetCharacter()
             local Humanoid = Util.GetHumanoid()
@@ -96,16 +99,20 @@ Commands.Global = {
         Names = {'loophipheight','loophh'},
         Description = 'Loops changing your characters JumpPower.',
         Arguments = {'Power'},
-        Call = function(Power)
-            Power = Power or 50
-            if typeof(Power) ~= 'number' then return end
+        Call = function(Height)
+            
+            if Util.GetHumanoid().RigType == Enum.HumanoidRigType.R15 then
+                Height = tonumber(Height) or 2.1
+            else
+                Height = tonumber(Height) or 0
+            end
             
             local Character = Util:GetCharacter()
             local Humanoid = Util.GetHumanoid()
 
             local function ChangeWS()
                 if Character and Humanoid then
-                    Humanoid.HipHeight = Power
+                    Humanoid.HipHeight = Height
                 end
             end
 
