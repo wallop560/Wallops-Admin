@@ -27,7 +27,7 @@ if not isfile('Wallops Admin/Custom Commands.lua') then
 --    Commands here ( as specified above )
 --}
 
-local Util = loadstring(game:GetHttp('https://raw.githubusercontent.com/wallop560/Wallops-Admin/main/Util.lua'))()
+local Util = loadstring(game:HttpGet('https://raw.githubusercontent.com/wallop560/Wallops-Admin/main/Util.lua'))()
 
 local Commands = {}
 
