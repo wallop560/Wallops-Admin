@@ -233,7 +233,7 @@ Commands.Global = {
                     table.insert(ViableServers,Server)
                 end
             end
-
+            print('uwei')
             local RandomIndex = math.random(1,#ViableServers)
             local RandomServer = ViableServers[RandomIndex]
 
