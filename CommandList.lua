@@ -46,7 +46,7 @@ Commands.Global = {
         Call = function(Speed)
             Speed = tonumber(Speed) or 16
             
-            local Character = Util:GetCharacter()
+            local Character = Util.GetCharacter()
             local Humanoid = Util.GetHumanoid()
 
             local function ChangeWS()
@@ -76,7 +76,7 @@ Commands.Global = {
         Call = function(Power)
             Power = tonumber(Power) or 50
             
-            local Character = Util:GetCharacter()
+            local Character = Util.GetCharacter()
             local Humanoid = Util.GetHumanoid()
 
             local function ChangeJP()
@@ -111,7 +111,7 @@ Commands.Global = {
                 Height = tonumber(Height) or 0
             end
             
-            local Character = Util:GetCharacter()
+            local Character = Util.GetCharacter()
             local Humanoid = Util.GetHumanoid()
 
             local function ChangeHH()
