@@ -221,9 +221,10 @@ Commands.Global = {
     {
         Names = {'shop','serverhop','hopserver'},
         Description = 'Joins a random server of the game you are in.',
-        Arguments = {},
-        Call = function()
-            local Servers = Util.GetServers(game.PlaceId,1,true)
+        Arguments = {'Pages'},
+        Call = function(Pages)
+            print('SHoouop')
+            local Servers = Util.GetServers(game.PlaceId,tonumber(Pages) or 1,true)
             local RandomIndex = math.random(1,#Servers)
             local RandomServer = Servers[RandomIndex]
 
