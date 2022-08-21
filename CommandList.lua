@@ -221,10 +221,19 @@ Commands.Global = {
     {
         Names = {'shop','serverhop','hopserver'},
         Description = 'Joins a random server of the game you are in.',
-        Arguments = {'Pages'},
-        Call = function(Pages)
-            print('SHoouop')
-            local Servers = Util.GetServers(game.PlaceId,tonumber(Pages) or 1,true)
+        Arguments = {'MinimumPeople'},
+        Call = function(MinimumPeople)
+            MinimumPeople = tonumber(MinimumPeople) or 1
+            local TotalServers = Util.GetServers(game.PlaceId)
+
+            local ViableServers = {}
+
+            for _,Server in next,TotalServers do
+                if Server.playing >= MinimumPeople then
+                    table.insert(ViableServers,Server)
+                end
+            end
+
             local RandomIndex = math.random(1,#Servers)
             local RandomServer = Servers[RandomIndex]
 
