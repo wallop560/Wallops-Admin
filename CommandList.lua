@@ -2,6 +2,8 @@ local Util = loadstring(game:HttpGet('https://raw.githubusercontent.com/wallop56
 local Commands = {}
 
 local HumanoidConnections = {}
+local RS = game:GetService('RunService')
+
 
 Commands.Global = {
     {
@@ -140,6 +142,11 @@ Commands.Global = {
         Arguments = {},
         Call = function()
             if HumanoidConnections.HHChanged then
+                if Util.GetHumanoid().RigType == Enum.HumanoidRigType.R15 then
+                    Util.GetHumanoid().HipHeight 2.1
+                else
+                    Util.GetHumanoid().HipHeight 0
+                end
                 HumanoidConnections.HHChanged:Disconnect()
                 HumanoidConnections.HHLoop:Disconnect()
                 HumanoidConnections.HHChanged = nil
@@ -153,6 +160,7 @@ Commands.Global = {
         Arguments = {},
         Call = function()
             if HumanoidConnections.JPChanged then
+                Util.GetHumanoid().JumpPower = 50
                 HumanoidConnections.JPChanged:Disconnect()
                 HumanoidConnections.JPLoop:Disconnect()
                 HumanoidConnections.JPChanged = nil
@@ -166,11 +174,36 @@ Commands.Global = {
         Arguments = {},
         Call = function()
             if HumanoidConnections.WSChanged then
+                Util.GetHumanoid().WalkSpeed = 16
                 HumanoidConnections.WSChanged:Disconnect()
                 HumanoidConnections.WSLoop:Disconnect()
                 HumanoidConnections.WSChanged = nil
                 HumanoidConnections.WSLoop = nil
             end
+        end
+    },
+    {
+        Names = {'noclip','nocollide'},
+        Description = 'Stops you from colliding with objects.',
+        Arguments = {},
+        Call = function()
+            HumanoidConnections.NCR = (HumanoidConnections.NCR and HumanoidConnections.NCR:Disconnect() and false) or RS.RenderStepped:Connect(function()
+                if game.Players.LocalPlayer.Character then
+                    for _,Part in next,game.Players.LocalPlayer.Character:GetChildren() do
+                        if Part:IsA('BasePart') then
+                            Part.CanCollide = false
+                        end
+                    end
+                end
+            end)
+        end
+    },
+    {
+        Names = {'clip','collide'},
+        Description = 'Lets you from colliding with objects.',
+        Arguments = {},
+        Call = function()
+            HumanoidConnections.NCR = HumanoidConnections.NCR and HumanoidConnections.NCR:Disconnect() and nil or nil
         end
     }
 
