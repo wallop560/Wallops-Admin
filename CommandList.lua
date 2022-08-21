@@ -143,9 +143,9 @@ Commands.Global = {
         Call = function()
             if HumanoidConnections.HHChanged then
                 if Util.GetHumanoid().RigType == Enum.HumanoidRigType.R15 then
-                    Util.GetHumanoid().HipHeight 2.1
+                    Util.GetHumanoid().HipHeight = 2.1
                 else
-                    Util.GetHumanoid().HipHeight 0
+                    Util.GetHumanoid().HipHeight = 0
                 end
                 HumanoidConnections.HHChanged:Disconnect()
                 HumanoidConnections.HHLoop:Disconnect()
