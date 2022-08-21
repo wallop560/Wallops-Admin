@@ -3,7 +3,9 @@ local Commands = {}
 
 local HumanoidConnections = {}
 local RS = game:GetService('RunService')
-
+local Players = game:GetService('Players')
+local HttpS = game:GetService('HttpService')
+local TPS = game:GetService('TeleportService')
 
 Commands.Global = {
     {
@@ -189,7 +191,7 @@ Commands.Global = {
         Call = function()
             HumanoidConnections.NCR = (HumanoidConnections.NCR and HumanoidConnections.NCR:Disconnect() and false) or RS.Stepped:Connect(function()
                 print('Rs')
-                local Character = game:GetService('Players').LocalPlayer.Character
+                local Character = Players.LocalPlayer.Character
                 if Character then
                     for _,Part in next,Character:GetChildren() do
                         if Part:IsA('BasePart') then
@@ -206,6 +208,28 @@ Commands.Global = {
         Arguments = {},
         Call = function()
             HumanoidConnections.NCR = HumanoidConnections.NCR and HumanoidConnections.NCR:Disconnect() and nil or nil
+        end
+    },
+    {
+        Names = {'drophats','dropaccessories'},
+        Description = 'Parents your accessories to roblox',
+        Arguments = {},
+        Call = function()
+            HumanoidConnections.NCR = HumanoidConnections.NCR and HumanoidConnections.NCR:Disconnect() and nil or nil
+        end
+    },
+    {
+        Names = {'shop','serverhop','hopserver'},
+        Description = {'Joins a random server of the game you are in.'},
+        Arguments = {},
+        Call = function()
+            local Servers = Util.GetServers(game.PlaceId,1,true)
+            local RandomIndex = math.random(1,#Servers)
+            local RandomServer = Servers[RandomIndex]
+
+            local ServerId = RandomServer.id
+
+            TPS:TeleportToPlaceInstance(game.PlaceId,ServerId,Players.LocalPlayer)
         end
     }
 
