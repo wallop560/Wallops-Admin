@@ -12,8 +12,8 @@ setmetatable(FakeCmds,{
 function FakeCmds:AddCommand(CommandNames,Arguments,Description,Call)
 	assert(type(CommandNames) == 'table' or type(CommandNames) == 'string','Argument 1 must be a string or a table got ' .. type(CommandNames))
 	assert(type(Arguments) == 'table','Argument 2 must be a table got ' .. type(Arguments))
-	assert(type(Description) == 'string','Argument 3 must be a table got ' .. type(Description))
-	assert(type(Call) == 'function','Argument 4 must be a table got ' .. type(Call))
+	assert(type(Description) == 'string','Argument 3 must be a string got ' .. type(Description))
+	assert(type(Call) == 'function','Argument 4 must be a function got ' .. type(Call))
 
 	if type(CommandNames) == 'string' then
 		CommandNames = {CommandNames}
