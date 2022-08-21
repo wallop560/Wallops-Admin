@@ -78,7 +78,7 @@ Util.GetServers = function(PlaceId,Pages,ExcludeFull)
 	local page = 1
 	local Request = game:GetService('HttpService'):JSONDecode(game:HttpGet(Url))
 
-	for _,Server in Request.data do
+	for _,Server in next,Request.data do
 		table.insert(Servers,Server)
 	end
 
