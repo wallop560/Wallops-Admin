@@ -85,7 +85,7 @@ Util.GetServers = function(PlaceId,Pages,ExcludeFull)
 	repeat 
 		Request = game:GetService('HttpService'):JSONDecode(game:HttpGet('https://games.roblox.com/v1/games/'..tostring(PlaceId)..'/servers/Public?sortOrder=Asc&limit=100&excludeFullGames='..tostring(ExcludeFull)..'&cursor='..Request.nextPageCursor))
 		page += 1
-		for _,Server in Request.data do
+		for _,Server in next,Request.data do
 			table.insert(Servers,Server)
 		end
 	until not Request.nextPageCursor or page == Pages
