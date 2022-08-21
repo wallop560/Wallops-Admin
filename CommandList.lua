@@ -234,8 +234,8 @@ Commands.Global = {
                 end
             end
 
-            local RandomIndex = math.random(1,#Servers)
-            local RandomServer = Servers[RandomIndex]
+            local RandomIndex = math.random(1,#ViableServers)
+            local RandomServer = ViableServers[RandomIndex]
 
             local ServerId = RandomServer.id
 
