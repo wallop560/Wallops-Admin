@@ -55,6 +55,8 @@ Commands.Global = {
                 end
             end
 
+            ChangeWS()
+
             HumanoidConnections.WSLoop = (HumanoidConnections.WSLoop and HumanoidConnections.WSLoop:Disconnect() and false) or Humanoid:GetPropertyChangedSignal('WalkSpeed'):Connect(ChangeWS)
 
             HumanoidConnections.WSChanged = (HumanoidConnections.WSChanged and HumanoidConnections.WSChanged:Disconnect() and false) or game.Players.LocalPlayer.CharacterAdded:Connect(function(char)
@@ -77,21 +79,23 @@ Commands.Global = {
             local Character = Util:GetCharacter()
             local Humanoid = Util.GetHumanoid()
 
-            local function ChangeWS()
+            local function ChangeJP()
                 if Character and Humanoid then
                     Humanoid.JumpPower = Power
                 end
             end
 
-            HumanoidConnections.JPLoop = (HumanoidConnections.JPLoop and HumanoidConnections.JPLoop:Disconnect() and false) or Humanoid:GetPropertyChangedSignal('WalkSpeed'):Connect(ChangeWS)
+            ChangeJP()
+
+            HumanoidConnections.JPLoop = (HumanoidConnections.JPLoop and HumanoidConnections.JPLoop:Disconnect() and false) or Humanoid:GetPropertyChangedSignal('WalkSpeed'):Connect(ChangeJP)
 
             HumanoidConnections.JPChanged = (HumanoidConnections.JPChanged and HumanoidConnections.JPChanged:Disconnect() and false) or game.Players.LocalPlayer.CharacterAdded:Connect(function(char)
                 Character = char
                 Humanoid = char:WaitForChild('Humanoid')
 
-                ChangeWS()
+                ChangeJP()
 
-                HumanoidConnections.JPLoop = (HumanoidConnections.JPLoop and HumanoidConnections.JPLoop:Disconnect() and false) or Humanoid:GetPropertyChangedSignal('WalkSpeed'):Connect(ChangeWS)
+                HumanoidConnections.JPLoop = (HumanoidConnections.JPLoop and HumanoidConnections.JPLoop:Disconnect() and false) or Humanoid:GetPropertyChangedSignal('WalkSpeed'):Connect(ChangeJP)
             end)
         end
     },
@@ -110,21 +114,23 @@ Commands.Global = {
             local Character = Util:GetCharacter()
             local Humanoid = Util.GetHumanoid()
 
-            local function ChangeWS()
+            local function ChangeHH()
                 if Character and Humanoid then
                     Humanoid.HipHeight = Height
                 end
             end
 
-            HumanoidConnections.HHLoop = (HumanoidConnections.HHLoop and HumanoidConnections.HHLoop:Disconnect() and false) or Humanoid:GetPropertyChangedSignal('WalkSpeed'):Connect(ChangeWS)
+            ChangeHH()
+
+            HumanoidConnections.HHLoop = (HumanoidConnections.HHLoop and HumanoidConnections.HHLoop:Disconnect() and false) or Humanoid:GetPropertyChangedSignal('WalkSpeed'):Connect(ChangeHH)
 
             HumanoidConnections.HHChanged = (HumanoidConnections.HHChanged and HumanoidConnections.HHChanged:Disconnect() and false) or game.Players.LocalPlayer.CharacterAdded:Connect(function(char)
                 Character = char
                 Humanoid = char:WaitForChild('Humanoid')
 
-                ChangeWS()
+                ChangeHH()
 
-                HumanoidConnections.HHLoop = (HumanoidConnections.HHLoop and HumanoidConnections.HHLoop:Disconnect() and false) or Humanoid:GetPropertyChangedSignal('WalkSpeed'):Connect(ChangeWS)
+                HumanoidConnections.HHLoop = (HumanoidConnections.HHLoop and HumanoidConnections.HHLoop:Disconnect() and false) or Humanoid:GetPropertyChangedSignal('WalkSpeed'):Connect(ChangeHH)
             end)
         end
     },
