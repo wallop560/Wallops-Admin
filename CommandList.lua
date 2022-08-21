@@ -188,6 +188,7 @@ Commands.Global = {
         Arguments = {},
         Call = function()
             HumanoidConnections.NCR = (HumanoidConnections.NCR and HumanoidConnections.NCR:Disconnect() and false) or RS.RenderStepped:Connect(function()
+                print('Rs')
                 if game.Players.LocalPlayer.Character then
                     for _,Part in next,game.Players.LocalPlayer.Character:GetChildren() do
                         if Part:IsA('BasePart') then
