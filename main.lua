@@ -105,7 +105,9 @@ UI.TextBox.FocusLost:Connect(function(Enter)
         local CommandName,Command,Direct = Command:GetClosestCommand(CommandArgument)
 
         if Command then
-            Command(unpack(Arguments))
+            spawn(function()
+                Command(unpack(Arguments))
+            end)
             UI.TextBox.Text = ''
         end
     end
