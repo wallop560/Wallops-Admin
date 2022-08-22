@@ -41,7 +41,7 @@ function FakeCmds:GetCommands()
 	return Cmds
 end
 
-function FakeCmds:GetCommand(Name)
+function FakeCmds:GetCommand(Text)
     for _,Command in next,Cmds do -- check for exact match
 		for _,CommandName in next,Command.CommandNames do
 			if CommandName == string.lower(Text) then
