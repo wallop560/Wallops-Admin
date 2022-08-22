@@ -275,7 +275,7 @@ Commands[8737602449] = {
             Time = Time*60
             local CurrentTime = Time
 
-            local CommandName,ServerHopCommand,Direct = Command.GetCommand('shop')
+            local CommandName,ServerHopCommand,Direct = Command:GetCommand('shop')
 
             Loops.AutoShop = true
 
