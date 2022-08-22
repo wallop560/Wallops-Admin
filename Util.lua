@@ -101,30 +101,27 @@ Util.ToggleCommandToConfig = function(CommandName,value)
 	writefile('Wallops Admin/Config.wa',Dump)
 end
 
-Util.CommandToString = function(...)
+Util.CommandToString = function(index,...)
 	local Str = 'local CommandList = loadstring(game:HttpGet("https://raw.githubusercontent.com/wallop560/Wallops-Admin/main/CommandList.lua"))()'
-    local tableString = '{'
-    local TableV = {...}
-	for i,v in next,TableV do
+    local tableString = ''
+    local Args = {...}
+	for i,v in next,Args do
 		tableString = tableString..'"'..tostring(v)..'"'
-		if i~= #TableV  then
+		if i~= #Args  then
 			tableString = tableString..','
 		end
 	end
-	tableString = tableString..'}'
 	
 	
     
     Str = Str..[[
-	for _,Name in next,]]..tableString..[[ do
 		for _,value in next,CommandList do
 			for _,Command in next,value do
 				if table.find(Command.Names,Name) then
-					Command.Call()
+					Command.Call(]]..tableString..[[)
 				end
 			end
-		end
-	end]]
+		end]]
     return Str
 end
 
