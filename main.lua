@@ -127,3 +127,4 @@ UIS.InputBegan:Connect(function(Input,gpe)
 end)
 
 getgenv().Command = Command
+getgenv().UI = UI
