@@ -1,5 +1,5 @@
 local Util = {}
-local Https = game:GetService
+local Https = game:GetService('HttpService')
 
 Util.Create = function(Class,Properties,Children)
 	Class = Class or 'Frame'
@@ -103,8 +103,8 @@ end
 
 Util.CommandToString = function(...)
 	local Str = 'local CommandList = loadstring(game:HttpGet("https://raw.githubusercontent.com/wallop560/Wallops-Admin/main/CommandList.lua"))()'
-	local tableString = '{'
-	local TableV = {...}
+    local tableString = '{'
+    local TableV = {...}
 	for i,v in next,TableV do
 		tableString = tableString..'"'..tostring(v)..'"'
 		if i~= #TableV  then
@@ -115,7 +115,7 @@ Util.CommandToString = function(...)
 	
 	
     
-	Str = Str..[[
+    Str = Str..[[
 	for _,Name in next,]]..tableString..[[ do
 		for _,value in next,CommandList do
 			for _,Command in next,value do
@@ -125,7 +125,7 @@ Util.CommandToString = function(...)
 			end
 		end
 	end]]
-	return Str
+    return Str
 end
 
 return Util
