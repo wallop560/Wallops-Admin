@@ -285,7 +285,17 @@ Commands[8737602449] = {
             while Loops.AutoShop and wait(1) and CurrentTime ~= 0 do
                 CurrentTime = CurrentTime - 1
             end
+            ((syn and syn.queue_on_teleport) or queue_on_teleport or (fluxus and fluxus.queue_on_teleport))(Util.CommandToString('autoshop',Time))
             ServerHopCommand('20')
+        end
+    },
+    {
+        Names = {'unautoshop','unautoserverhop','unautohopserver'},
+        Description = 'Stops you automaticly hops servers after a specified ammount of munites of not getting donations.',
+        Arguments = {},
+        Call = function()
+            Loops.AutoShop = false
+            OtherConnections.AutoShopReset = (OtherConnections.AutoShopReset and OtherConnections.AutoShopReset:Disconnect() and nil) or nil
         end
     }
 }
