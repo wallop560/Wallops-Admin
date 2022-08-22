@@ -255,7 +255,7 @@ Commands.Global = {
     {
         Names = {'rejoin','rj'},
         Description = 'Rejoins the same server.',
-        Arguments = {},
+        Arguments = {}
         Call = function()
             TPS:TeleportToPlaceInstance(game.PlaceId,game.JobId,game.Players.LocalPlayer)
         end
@@ -275,6 +275,8 @@ Commands[8737602449] = {
             Time = Time*60
             local CurrentTime = Time
 
+            local CommandName,ServerHopCommand,Direct = Command.GetCommand('shop')
+
             Loops.AutoShop = true
 
             OtherConnections.AutoShopReset = Players.LocalPlayer.leaderstats.Raised.Changed:Connect(function()
@@ -284,7 +286,7 @@ Commands[8737602449] = {
             while Loops.AutoShop and wait(1) and CurrentTime ~= 0 do
                 CurrentTime = CurrentTime - 1
             end
-            Command:GetCommand('shop')('20')
+            ServerHopCommand('20')
         end
     }
 }
