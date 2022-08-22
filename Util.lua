@@ -1,4 +1,5 @@
 local Util = {}
+local Https = game:GetService
 
 Util.Create = function(Class,Properties,Children)
 	Class = Class or 'Frame'
@@ -91,6 +92,13 @@ Util.GetServers = function(PlaceId,Pages,ExcludeFull)
 	until not Request.nextPageCursor or page == Pages
 
 	return Servers
+end
+
+Util.ToggleCommandToConfig = function(CommandName,value)
+	local Config = Https:JSONDecode(readfile('Wallops Admin/Config.wa'))
+	Config.Commands[CommandName] = value
+	local Dump = Https:JSONEncode(Config)
+	writefile('Wallops Admin/Config.wa',Dump)
 end
 
 return Util
