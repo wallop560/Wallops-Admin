@@ -284,7 +284,7 @@ Commands[8737602449] = {
             while Loops.AutoShop and wait(1) and CurrentTime ~= 0 do
                 CurrentTime = CurrentTime - 1
             end
-            Command.GetCommand('shop')('20')
+            Command:GetCommand('shop')('20')
         end
     }
 }
