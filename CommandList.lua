@@ -9,7 +9,6 @@ local Players = game:GetService('Players')
 local HttpS = game:GetService('HttpService')
 local TPS = game:GetService('TeleportService')
 local VU = game:GetService("VirtualUser")
-local Command = getgenv().Command
 Commands.Global = {
     {
         Names = {'walkspeed','ws','speed'},
@@ -275,7 +274,7 @@ Commands[8737602449] = {
             Time = Time*60
             local CurrentTime = Time
 
-            local CommandName,ServerHopCommand,Direct = Command:GetCommand('shop')
+            local CommandName,ServerHopCommand,Direct = getgenv().Command:GetCommand('shop')
 
             Loops.AutoShop = true
 
