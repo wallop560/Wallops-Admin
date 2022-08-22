@@ -117,7 +117,7 @@ Util.CommandToString = function(index,...)
     Str = Str..[[
 		for _,value in next,CommandList do
 			for _,Command in next,value do
-				if table.find(Command.Names,Name) then
+				if table.find(Command.Names,]]..index..[[) then
 					Command.Call(]]..tableString..[[)
 				end
 			end
