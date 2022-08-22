@@ -4,10 +4,16 @@ end
 local UIS = game:GetService('UserInputService')
 local TS = game:GetService('TweenService')
 local RS = game:GetService('RunService')
+local Https = game:GetService('HttpService')
 local Players = game:GetService('Players')
 local isfile = isfile or pcall(readfile,'wowd.txt')
 
 local ConfigFoler = makefolder('Wallops Admin')
+
+if not isfile('Wallops Admin/Config.wa') then
+    writefile('Wallops Admin/Config.wa','{"Commands":{}}')
+end
+
 
 if not isfile('Wallops Admin/Custom Commands.lua') then
     writefile('Wallops Admin/Custom Commands.lua',[[-- custom commands can be added here. if you have any suggestions please dm me at le birdo#2221
@@ -37,10 +43,13 @@ return Commands]])
 end
 
 local CustomCommands = loadstring(readfile('Wallops Admin/Custom Commands.lua'))()
+local Config = Https:JSONDecode(readfile('Wallops Admin/Config.wa'))
 
 local UI = loadstring(game:HttpGet('https://raw.githubusercontent.com/wallop560/Wallops-Admin/main/Ui.lua'))()
 local Command = loadstring(game:HttpGet('https://raw.githubusercontent.com/wallop560/Wallops-Admin/main/Command.lua'))()
 local CommandList = loadstring(game:HttpGet('https://raw.githubusercontent.com/wallop560/Wallops-Admin/main/CommandList.lua'))()
+
+
 
 local GuiRestPosition = UDim2.new(0.5, 0, 1, -100)
 local GuiClosePosition = UDim2.new(0.5,0,1,100)
@@ -117,3 +126,4 @@ UIS.InputBegan:Connect(function(Input,gpe)
     end
 end)
 
+getgenv().Command = Command
