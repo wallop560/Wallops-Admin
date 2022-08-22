@@ -255,7 +255,7 @@ Commands.Global = {
     {
         Names = {'rejoin','rj'},
         Description = 'Rejoins the same server.',
-        Arguments = {}
+        Arguments = {},
         Call = function()
             TPS:TeleportToPlaceInstance(game.PlaceId,game.JobId,game.Players.LocalPlayer)
         end
