@@ -79,8 +79,11 @@ UI.TextBox:GetPropertyChangedSignal('Text'):Connect(function()
     table.remove(Arguments,1)
 
     local CommandName,Command,Direct = Command:GetClosestCommand(CommandArgument)
-    
-    UI.Preview.Text = CommandName
+    if #Arguments == 0 then
+        UI.Preview.Text = CommandName
+    else
+        UI.Preview.Text = ''
+    end
 end)
 
 UI.TextBox.FocusLost:Connect(function(Enter)
