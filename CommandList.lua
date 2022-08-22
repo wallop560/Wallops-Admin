@@ -2,11 +2,14 @@ local Util = loadstring(game:HttpGet('https://raw.githubusercontent.com/wallop56
 local Commands = {}
 
 local HumanoidConnections = {}
+local OtherConnections = {}
+local Loops = {}
 local RS = game:GetService('RunService')
 local Players = game:GetService('Players')
 local HttpS = game:GetService('HttpService')
 local TPS = game:GetService('TeleportService')
-
+local VU = game:GetService("VirtualUser")
+local Command = getgenv().Command
 Commands.Global = {
     {
         Names = {'walkspeed','ws','speed'},
@@ -143,17 +146,13 @@ Commands.Global = {
         Description = 'Stops loop setting your HipHeight.',
         Arguments = {},
         Call = function()
-            if HumanoidConnections.HHChanged then
-                if Util.GetHumanoid().RigType == Enum.HumanoidRigType.R15 then
-                    Util.GetHumanoid().HipHeight = 2.1
-                else
-                    Util.GetHumanoid().HipHeight = 0
-                end
-                HumanoidConnections.HHChanged:Disconnect()
-                HumanoidConnections.HHLoop:Disconnect()
-                HumanoidConnections.HHChanged = nil
-                HumanoidConnections.HHLoop = nil
+            if Util.GetHumanoid().RigType == Enum.HumanoidRigType.R15 then
+                Util.GetHumanoid().HipHeight = 2.1
+            else
+                Util.GetHumanoid().HipHeight = 0
             end
+            HumanoidConnections.HHChanged = (HumanoidConnections.HHChanged and HumanoidConnections.HHChanged:Disconnect() and false) or nil
+            HumanoidConnections.HHLoop = (HumanoidConnections.HHLoop and HumanoidConnections.HHLoop:Disconnect() and false) or nil
         end
     },
     {
@@ -161,13 +160,9 @@ Commands.Global = {
         Description = 'Stops loop setting your JumpPower.',
         Arguments = {},
         Call = function()
-            if HumanoidConnections.JPChanged then
-                Util.GetHumanoid().JumpPower = 50
-                HumanoidConnections.JPChanged:Disconnect()
-                HumanoidConnections.JPLoop:Disconnect()
-                HumanoidConnections.JPChanged = nil
-                HumanoidConnections.JPLoop = nil
-            end
+            Util.GetHumanoid().JumpPower = 50
+            HumanoidConnections.JPChanged = (HumanoidConnections.HHChanged and HumanoidConnections.HHChanged:Disconnect() and false) or nil
+            HumanoidConnections.JPLoop = (HumanoidConnections.HHLoop and HumanoidConnections.HHLoop:Disconnect() and false) or nil
         end
     },
     {
@@ -175,13 +170,9 @@ Commands.Global = {
         Description = 'Stops loop setting your WalkSpeed.',
         Arguments = {},
         Call = function()
-            if HumanoidConnections.WSChanged then
-                Util.GetHumanoid().WalkSpeed = 16
-                HumanoidConnections.WSChanged:Disconnect()
-                HumanoidConnections.WSLoop:Disconnect()
-                HumanoidConnections.WSChanged = nil
-                HumanoidConnections.WSLoop = nil
-            end
+            Util.GetHumanoid().WalkSpeed = 16
+            HumanoidConnections.WSChanged = (HumanoidConnections.HHChanged and HumanoidConnections.HHChanged:Disconnect() and false) or nil
+            HumanoidConnections.WSLoop = (HumanoidConnections.HHLoop and HumanoidConnections.HHLoop:Disconnect() and false) or nil
         end
     },
     {
@@ -233,7 +224,6 @@ Commands.Global = {
                     table.insert(ViableServers,Server)
                 end
             end
-            print('uwei')
             local RandomIndex = math.random(1,#ViableServers)
             local RandomServer = ViableServers[RandomIndex]
 
@@ -241,8 +231,62 @@ Commands.Global = {
 
             TPS:TeleportToPlaceInstance(game.PlaceId,ServerId,Players.LocalPlayer)
         end
+    },
+    {
+        Names = {'antiafk','antiidle'},
+        Description = 'Stops you from being kicked when idle.',
+        Arguments = {},
+        Call = function()
+            HumanoidConnections.AntiAfk = (HumanoidConnections.AntiAfk and HumanoidConnections.AntiAfk:Disconnect() and false) or game:GetService("Players").LocalPlayer.Idled:connect(function()
+                VU:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+                wait(.2)
+                VU:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+            end)
+        end
+    },
+    {
+        Names = {'unantiafk','unantiidle','noantiafk','noantiidle'},
+        Description = 'allows you to be kicked when idle.',
+        Arguments = {},
+        Call = function()
+            HumanoidConnections.AntiAfk = (HumanoidConnections.AntiAfk and HumanoidConnections.AntiAfk:Disconnect() and false) or nil
+        end
+    },
+    {
+        Names = {'rejoin','rj'},
+        Description = 'Rejoins the same server.',
+        Arguments = {}
+        Call = function()
+            TPS:TeleportToPlaceInstance(game.PlaceId,game.JobId,game.Players.LocalPlayer)
+        end
     }
 
+}
+Commands[8737602449] = {
+    {
+        Names = {'autoshop','autoserverhop','autohopserver'},
+        Description = 'Automaticly hops servers after a specified ammount of munites of not getting donations.',
+        Arguments = {'Time'},
+        Call = function(Time)
+            if Loops.AutoShop then
+                return
+            end
+            Time = tonumber(Time) or 30
+            Time = Time*60
+            local CurrentTime = Time
+
+            Loops.AutoShop = true
+
+            OtherConnections.AutoShopReset = Players.LocalPlayer.leaderstats.Raised.Changed:Connect(function()
+                CurrentTime = Time
+            end)
+
+            while Loops.AutoShop and wait(1) and CurrentTime ~= 0 do
+                CurrentTime -= 1
+            end
+            Command.GetCommand('shop')('20')
+        end
+    }
 }
 
 return Commands
