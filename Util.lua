@@ -75,7 +75,7 @@ Util.GetServers = function(PlaceId,Pages,ExcludeFull)
 	PlaceId = placeId or game.PlaceId
 	local Servers = {}
 
-	local Url = 'https://games.roblox.com/v1/games/'..tostring(PlaceId)..'/servers/Public?sortOrder=Asc&limit=100&excludeFullGames='..tostring(ExcludeFull)..'&cursor='
+	local Url = 'https://games.roblox.com/v1/games/'..tostring(PlaceId)..'/servers/Public?sortOrder=Asc&limit=100&excludeFullGames='..tostring(ExcludeFull)
 	local page = 1
 	local Request = game:GetService('HttpService'):JSONDecode(game:HttpGet(Url))
 
