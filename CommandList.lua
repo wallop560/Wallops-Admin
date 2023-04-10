@@ -423,7 +423,7 @@ do
                 Description = 'Gives a tool that lets you delete anything ',
                 Arguments = {},
                 Call = function()
-                    local Tool = Instance.new('Tool',plr.Backpack)
+                    local Tool = Instance.new('Tool',Players.LocalPlayer.Backpack)
                     Tool.Name = 'Delete'
                     Tool.TextureId = 'rbxassetid://29402763'
                     local MouseMove
