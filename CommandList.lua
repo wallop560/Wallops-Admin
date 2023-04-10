@@ -378,7 +378,11 @@ do
                     Players = Util.GetPlayer(Players)
                     for _,Player in next,Players do
                         local R6 = Player.Character.Humanoid.RigType == Enum.RigType.R6
-                        DestroyFunction(R6 and (Player.Character:FindFirstChild('LeftArm'),Player.Character:FindFirstChild('RightArm')) or (Player.Character:FindFirstChild('LeftUpperArm'),Player.Character:FindFirstChild('RightUpperArm')))
+                        if R6 then
+                            DestroyFunction(Player.Character:FindFirstChild('LeftArm'),Player.Character:FindFirstChild('RightArm'))
+                        elseif not R6 then
+                            DestroyFunction(Player.Character:FindFirstChild('LeftUpperArm'),Player.Character:FindFirstChild('RightUpperArm'))
+                        end
                     end
                 end
             },
@@ -390,7 +394,11 @@ do
                     Players = Util.GetPlayer(Players)
                     for _,Player in next,Players do
                         local R6 = Player.Character.Humanoid.RigType == Enum.RigType.R6
-                        DestroyFunction(R6 and (Player.Character:FindFirstChild('LeftLeg'),Player.Character:FindFirstChild('RightLeg')) or (Player.Character:FindFirstChild('LeftUpperLeg'),Player.Character:FindFirstChild('RightUpperLeg')))
+                        if R6 then
+                            DestroyFunction(Player.Character:FindFirstChild('LeftLeg'),Player.Character:FindFirstChild('RightLeg'))
+                        elseif not R6 then
+                            DestroyFunction(Player.Character:FindFirstChild('LeftUpperLeg'),Player.Character:FindFirstChild('RightUpperLeg'))
+                        end
                     end
                 end
             },
