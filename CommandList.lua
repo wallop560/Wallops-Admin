@@ -478,6 +478,7 @@ do
                 Description = 'Wipes the Targets base',
                 Arguments = {'Player'},
                 Call = function(Players)
+                    Players = Util.GetPlayer(Players)
                     for _,Item in next,PlayerModels:GetChildren() do
                         if Item:FindFirstChild('Owner') and table.find(Players,Item.Owner.Value) then
                             DestroyFunction(Item)
