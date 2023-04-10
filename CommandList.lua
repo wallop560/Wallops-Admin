@@ -380,9 +380,8 @@ do
                     for _,Player in next,Players do
                         if not Player.Character or not Player.Character:FindFirstChild('Torso') then continue end
                         local R6 = Player.Character:FindFirstChild('Torso') and true or false
-                        print(R6,Player)
                         if R6 then
-                            DestroyFunction(Player.Character:FindFirstChild('LeftArm'),Player.Character:FindFirstChild('RightArm'))
+                            DestroyFunction(Player.Character:FindFirstChild('Left Arm'),Player.Character:FindFirstChild('Right Arm'))
                         elseif not R6 then
                             DestroyFunction(Player.Character:FindFirstChild('LeftUpperArm'),Player.Character:FindFirstChild('RightUpperArm'))
                         end
@@ -399,7 +398,7 @@ do
                         if not Player.Character or not Player.Character:FindFirstChild('Torso') then continue end
                         local R6 = Player.Character:FindFirstChild('Torso') and true or false
                         if R6 then
-                            DestroyFunction(Player.Character:FindFirstChild('LeftLeg'),Player.Character:FindFirstChild('RightLeg'))
+                            DestroyFunction(Player.Character:FindFirstChild('Left Leg'),Player.Character:FindFirstChild('Right Leg'))
                         elseif not R6 then
                             DestroyFunction(Player.Character:FindFirstChild('LeftUpperLeg'),Player.Character:FindFirstChild('RightUpperLeg'))
                         end
