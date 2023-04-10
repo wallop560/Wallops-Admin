@@ -377,7 +377,7 @@ do
                 Call = function(Players)
                     Players = Util.GetPlayer(Players)
                     for _,Player in next,Players do
-                        local R6 = Player.Character.Humanoid.RigType == Enum.RigType.R6
+                        local R6 = Player.Character.Humanoid.RigType == Enum.HumanoidRigType.R6
                         if R6 then
                             DestroyFunction(Player.Character:FindFirstChild('LeftArm'),Player.Character:FindFirstChild('RightArm'))
                         elseif not R6 then
@@ -393,7 +393,7 @@ do
                 Call = function(Players)
                     Players = Util.GetPlayer(Players)
                     for _,Player in next,Players do
-                        local R6 = Player.Character.Humanoid.RigType == Enum.RigType.R6
+                        local R6 = Player.Character.Humanoid.RigType == Enum.HumanoidRigType.R6
                         if R6 then
                             DestroyFunction(Player.Character:FindFirstChild('LeftLeg'),Player.Character:FindFirstChild('RightLeg'))
                         elseif not R6 then
