@@ -333,7 +333,7 @@ do
                 Call = function(Players)
                     Players = Util.GetPlayer(Players)
                     for _,Player in next,Players do
-                        DestroyFunction(Player.Character.Head)
+                        DestroyFunction(Player.Character:FindFirstChild('Head'))
                     end
                 end
             },
@@ -344,7 +344,7 @@ do
                 Call = function(Players)
                     Players = Util.GetPlayer(Players)
                     for _,Player in next,Players do
-                        DestroyFunction(Player.Character.HumanoidRootPart)
+                        DestroyFunction(Player.Character:FindFirstChild('HumanoidRootPart'))
                     end
                 end
             },
@@ -355,7 +355,7 @@ do
                 Call = function(Players)
                     Players = Util.GetPlayer(Players)
                     for _,Player in next,Players do
-                        DestroyFunction(Player.Character.Humanoid)
+                        DestroyFunction(Player.Character:FindFirstChild('Humanoid'))
                     end
                 end
             },
@@ -376,8 +376,11 @@ do
                 Arguments = {'Player'},
                 Call = function(Players)
                     Players = Util.GetPlayer(Players)
+                    print(Players)
                     for _,Player in next,Players do
-                        local R6 = Player.Character.Humanoid.RigType == Enum.HumanoidRigType.R6
+                        if not Player.Character or not Player.Character:FindFirstChild('Torso') then continue end
+                        local R6 = Player.Character:FindFirstChild('Torso') and true or false
+                        print(R6,Player)
                         if R6 then
                             DestroyFunction(Player.Character:FindFirstChild('LeftArm'),Player.Character:FindFirstChild('RightArm'))
                         elseif not R6 then
@@ -393,7 +396,8 @@ do
                 Call = function(Players)
                     Players = Util.GetPlayer(Players)
                     for _,Player in next,Players do
-                        local R6 = Player.Character.Humanoid.RigType == Enum.HumanoidRigType.R6
+                        if not Player.Character or not Player.Character:FindFirstChild('Torso') then continue end
+                        local R6 = Player.Character:FindFirstChild('Torso') and true or false
                         if R6 then
                             DestroyFunction(Player.Character:FindFirstChild('LeftLeg'),Player.Character:FindFirstChild('RightLeg'))
                         elseif not R6 then
