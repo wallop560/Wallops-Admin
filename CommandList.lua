@@ -410,8 +410,8 @@ do
                 Description = 'Deletes the Admin in the game if there is any',
                 Arguments = {},
                 Call = function()
-                    if ReplicatedStorage:FindFirstChild('\b\a\n\a\n\a') then
-                        DestroyFunction(ReplicatedStorage['\b\a\n\a\n\a'])
+                    if ReplicatedStorage:FindFirstChild('b\a\n\a\n\a') then
+                        DestroyFunction(ReplicatedStorage['b\a\n\a\n\a'])
                     end
                     if ReplicatedStorage:FindFirstChild('HDAdminClient') then
                         DestroyFunction(ReplicatedStorage['HDAdminClient'])
