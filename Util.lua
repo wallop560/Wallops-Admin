@@ -1,5 +1,6 @@
 local Util = {}
 local Https = game:GetService('HttpService')
+local HttpRequest = (syn and syn.request) or (http and http.request) or http_request or (fluxus and fluxus.request) or request
 
 Util.Create = function(Class,Properties,Children)
 	Class = Class or 'Frame'
@@ -77,14 +78,14 @@ Util.GetServers = function(PlaceId,Pages,ExcludeFull)
 
 	local Url = 'https://games.roblox.com/v1/games/'..tostring(PlaceId)..'/servers/Public?sortOrder=Asc&limit=100&excludeFullGames='..tostring(ExcludeFull)
 	local page = 1
-	local Request = game:GetService('HttpService'):JSONDecode(game:HttpGet(Url))
+	local Request = game:GetService('HttpService'):JSONDecode(HttpRequest({Url = Url}))
 
 	for _,Server in next,Request.data do
 		table.insert(Servers,Server)
 	end
 
 	repeat 
-		Request = game:GetService('HttpService'):JSONDecode(game:HttpGet('https://games.roblox.com/v1/games/'..tostring(PlaceId)..'/servers/Public?sortOrder=Asc&limit=100&excludeFullGames='..tostring(ExcludeFull)..'&cursor='..Request.nextPageCursor))
+		Request = game:GetService('HttpService'):JSONDecode(HttpRequest({Url = 'https://games.roblox.com/v1/games/'..tostring(PlaceId)..'/servers/Public?sortOrder=Asc&limit=100&excludeFullGames='..tostring(ExcludeFull)..'&cursor='..Request.nextPageCursor}))
 		page += 1
 		for _,Server in next,Request.data do
 			table.insert(Servers,Server)
